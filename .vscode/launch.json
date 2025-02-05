@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -14,7 +11,8 @@
                 "LD_PRELOAD": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
                 "LIBGL_DEBUG": "verbose",
                 "LIBGL_DRIVERS_PATH": "/usr/lib/x86_64-linux-gnu/dri",
-                "LD_LIBRARY_PATH": "/usr/lib/x86_64-linux-gnu"
+                "LD_LIBRARY_PATH": "/usr/lib/x86_64-linux-gnu",
+                "QT_QPA_PLATFORM": "xcb"
             }
         }
     ]

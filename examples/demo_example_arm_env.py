@@ -9,8 +9,8 @@ def main():
     max_steps = 10000
     show_gui = True
     show_tactile = False
-    render = False
-    print_info = True
+    render = True
+    print_info = False
     image_size = [256, 256]
     env_modes = {
         # which dofs can have movement (environment dependent)

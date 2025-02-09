@@ -445,6 +445,9 @@ class TactileSensor:
         dep = np.reshape(dep, (h, w))
         mask = np.reshape(mask, (h, w))
 
+        self.draw_camera_frame()
+        self.draw_t_s_frame()
+
         return rgb, dep, mask
 
     def t_s_camera(self):

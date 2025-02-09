@@ -22,210 +22,69 @@ float_formatter = "{:.6f}".format
 np.set_printoptions(formatter={"float_kind": float_formatter})
 
 env_modes_default = {
-    "movement_mode": "xyzRxRyRz",
+    "movement_mode": "xy",
     "control_mode": "TCP_velocity_control",
+    "rand_init_obj_pos": False,
+    "rand_obj_size": False,
+    "rand_embed_dist": False,
     "observation_mode": "oracle",
     "reward_mode": "dense",
 }
 
 rest_poses_dict = {
     "ur5": {
-        "tactip": {
-            "standard": np.array([
-                0.00,  # world_joint         (fixed)
-                0.166827,  # base_joint       (revolute)
-                -2.16515,  # shoulder_joint  (revolute)
-                -1.64365,  # elbow_joint     (revolute)
-                -0.90317,  # wrist_1_joint   (revolute)
-                1.57315,  # wrist_2_joint    (revolute)
-                1.74001,  # wrist_3_joint    (revolute)
-                0.00,  # ee_joint            (fixed)
-                0.00,  # tactip_ee_joint     (fixed)
-                0.00,  # tactip_tip_to_body (fixed)
-                0.00   # tcp_joint           (fixed)
-            ]),
-        },
-        "digit": {
-            "standard": np.array([
-                0.00,  # world_joint         (fixed)
-                0.1666452116249431,  # base_joint       (revolute)
-                -2.2334888481855204,  # shoulder_joint  (revolute)
-                -1.6642245054428424,  # elbow_joint     (revolute)
-                -0.8142762445463524,  # wrist_1_joint   (revolute)
-                1.573151527964482,  # wrist_2_joint    (revolute)
-                1.7398309441833082,  # wrist_3_joint    (revolute)
-                0.00,  # ee_joint            (fixed)
-                0.00,  # tactip_ee_joint     (fixed)
-                0.00,  # tactip_tip_to_body (fixed)
-                0.00   # tcp_joint           (fixed)
-            ]),
-        },
-        "digitac": {
-            "standard": np.array([
-                0.00,  # world_joint         (fixed)
-                0.16664443404149898,  # base_joint       (revolute)
-                -2.2242489977536737,  # shoulder_joint  (revolute)
-                -1.6618744232210114,  # elbow_joint     (revolute)
-                -0.8258663681806591,  # wrist_1_joint   (revolute)
-                1.5731514988184077,  # wrist_2_joint    (revolute)
-                1.7398302172182332,  # wrist_3_joint    (revolute)
-                0.00,  # ee_joint            (fixed)
-                0.00,  # tactip_ee_joint     (fixed)
-                0.00,  # tactip_tip_to_body (fixed)
-                0.00   # tcp_joint           (fixed)
-            ]),
-        },
-    },
-    "kuka_iiwa": {
-        "tactip": {
-            "standard": np.array([
+        "flat": np.array(
+            [
                 0.00,  # world_joint          (fixed)
-                0.27440,  # lbr_iiwa_joint_1  (revolute)
-                1.20953,  # lbr_iiwa_joint_2  (revolute)
-                2.66025,  # lbr_iiwa_joint_3  (revolute)
-                1.26333,  # lbr_iiwa_joint_4  (revolute)
-                -2.50256,  # lbr_iiwa_joint_5 (revolute)
-                0.81968,  # lbr_iiwa_joint_6  (revolute)
-                2.76347,  # lbr_iiwa_joint_7  (revolute)
+                0.16682,  # base_joint        (revolute)
+                -2.23156,  # shoulder_joint   (revolute)
+                -1.66642,  # elbow_joint      (revolute)
+                -0.81399,  # wrist_1_joint    (revolute)
+                1.57315,  # wrist_2_joint     (revolute)
+                1.74001,  # wrist_3_joint     (revolute)
                 0.00,  # ee_joint             (fixed)
                 0.00,  # tactip_ee_joint      (fixed)
                 0.00,  # tactip_tip_to_body  (fixed)
-                0.00   # tcp_joint            (fixed)
-            ])
-        },
-        "digit": {
-            "standard": np.array([
-                0.00,  # world_joint          (fixed)
-                0.27440,  # lbr_iiwa_joint_1  (revolute)
-                1.20953,  # lbr_iiwa_joint_2  (revolute)
-                2.66025,  # lbr_iiwa_joint_3  (revolute)
-                1.26333,  # lbr_iiwa_joint_4  (revolute)
-                -2.50256,  # lbr_iiwa_joint_5 (revolute)
-                0.81968,  # lbr_iiwa_joint_6  (revolute)
-                2.76347,  # lbr_iiwa_joint_7  (revolute)
-                0.00,  # ee_joint             (fixed)
-                0.00,  # tactip_ee_joint      (fixed)
-                0.00,  # tactip_tip_to_body  (fixed)
-                0.00   # tcp_joint            (fixed)
-            ])
-        },
-        "digitac": {
-            "standard": np.array([
-                0.00,  # world_joint          (fixed)
-                0.27440,  # lbr_iiwa_joint_1  (revolute)
-                1.20953,  # lbr_iiwa_joint_2  (revolute)
-                2.66025,  # lbr_iiwa_joint_3  (revolute)
-                1.26333,  # lbr_iiwa_joint_4  (revolute)
-                -2.50256,  # lbr_iiwa_joint_5 (revolute)
-                0.81968,  # lbr_iiwa_joint_6  (revolute)
-                2.76347,  # lbr_iiwa_joint_7  (revolute)
-                0.00,  # ee_joint             (fixed)
-                0.00,  # tactip_ee_joint      (fixed)
-                0.00,  # tactip_tip_to_body  (fixed)
-                0.00   # tcp_joint            (fixed)
-            ])
-        },
+                0.00,  # tcp_joint            (fixed)
+            ]
+        )
     },
     "franka_panda": {
-        "tactip": {
-            "standard": np.array([
+        "flat": np.array(
+            [
                 0.00,  # world_joint         (fixed)
-                3.21456,  # panda_joint1     (revolute)
-                1.30233,  # panda_joint2     (revolute)
-                2.99673,  # panda_joint3     (revolute)
-                0.83832,  # panda_joint4     (revolute)
-                -2.97647,  # panda_joint5    (revolute)
-                2.13176,  # panda_joint6     (revolute)
-                4.65986,  # panda_joint7     (revolute)
+                -2.90268,  # panda_joint1    (revolute)
+                1.44940,  # panda_joint2     (revolute)
+                2.64277,  # panda_joint3     (revolute)
+                0.79214,  # panda_joint4     (revolute)
+                -2.54438,  # panda_joint5    (revolute)
+                2.13612,  # panda_joint6     (revolute)
+                -1.74541,  # panda_joint7    (revolute)
                 0.00,  # ee_joint            (fixed)
                 0.00,  # tactip_ee_joint     (fixed)
                 0.00,  # tactip_tip_to_body (fixed)
-                0.00   # tcp_joint           (fixed)
-            ]),
-        },
-        "digit": {
-            "standard": np.array([
-                0.00,  # world_joint         (fixed)
-                3.21456,  # panda_joint1     (revolute)
-                1.30233,  # panda_joint2     (revolute)
-                2.99673,  # panda_joint3     (revolute)
-                0.83832,  # panda_joint4     (revolute)
-                -2.97647,  # panda_joint5    (revolute)
-                2.13176,  # panda_joint6     (revolute)
-                4.65986,  # panda_joint7     (revolute)
-                0.00,  # ee_joint            (fixed)
-                0.00,  # tactip_ee_joint     (fixed)
-                0.00,  # tactip_tip_to_body (fixed)
-                0.00   # tcp_joint           (fixed)
-            ]),
-        },
-        "digitac": {
-            "standard": np.array([
-                0.00,  # world_joint         (fixed)
-                3.21456,  # panda_joint1     (revolute)
-                1.30233,  # panda_joint2     (revolute)
-                2.99673,  # panda_joint3     (revolute)
-                0.83832,  # panda_joint4     (revolute)
-                -2.97647,  # panda_joint5    (revolute)
-                2.13176,  # panda_joint6     (revolute)
-                4.65986,  # panda_joint7     (revolute)
-                0.00,  # ee_joint            (fixed)
-                0.00,  # tactip_ee_joint     (fixed)
-                0.00,  # tactip_tip_to_body (fixed)
-                0.00   # tcp_joint           (fixed)
-            ]),
-        },
+                0.00,  # tcp_joint           (fixed)
+            ]
+        )
     },
-    "mg400": {
-        "tactip": {
-            "standard": np.array([
-                0,                      # j1        (fixed)
-                1.1199979523765513,     # j2_1         (revolute)
-                -0.027746434948259045,  # j3_1         (revolute)
-                -1.094390587897371,     # j4_1          (revolute)
-                0.000795099112695166,   # j5          (revolute)
-                0,                      # ee_joint           (fixed)
-                0,                      # tactip_ee_joint           (fixed)
-                0,                      # tactip_tip_to_body    (fixed)
-                0,                      # tcp_joint (fixed)
-                1.120002713232204,      # j2_2 = j2_1         (revolute)
-                -1.1199729024887553,   # j3_2 = -j2_1         (revolute)
-                1.0922685386653785      # j4_2 = j2_1 + j3_1          (revolute)
-            ]),
-        },
-        "digit": {
-            "standard": np.array([
-                0,                      # j1        (fixed)
-                1.3190166816731614,     # j2_1         (revolute)
-                -0.057932730559221525,  # j3_1         (revolute)
-                -1.2611243932983605,     # j4_1          (revolute)
-                0.0006084288058448784,   # j5          (revolute)
-                0,                      # ee_joint           (fixed)
-                0,                      # tactip_ee_joint           (fixed)
-                0,                      # tactip_tip_to_body    (fixed)
-                0,                      # tcp_joint (fixed)
-                1.3190195840338783,      # j2_2 = j2_1         (revolute)
-                -1.3189925313906967,   # j3_2 = -j2_1         (revolute)
-                1.2610906509351185      # j4_2 = j2_1 + j3_1          (revolute)
-            ]),
-        },
-        "digitac": {
-            "standard": np.array([
-                0,                      # j1        (fixed)
-                1.3223687315585777,     # j2_1         (revolute)
-                -0.06290495221125363,  # j3_1         (revolute)
-                -1.2594762221064615,     # j4_1          (revolute)
-                0.0006084288058448784,   # j5          (revolute)
-                0,                      # ee_joint           (fixed)
-                0,                      # tactip_ee_joint           (fixed)
-                0,                      # tactip_tip_to_body    (fixed)
-                0,                      # tcp_joint (fixed)
-                1.3223720640647498,      # j2_2 = j2_1         (revolute)
-                -1.3223720640647498,   # j3_2 = -j2_1         (revolute)
-                1.2594757646221153      # j4_2 = j2_1 + j3_1          (revolute)
-            ]),
-        },
-    }
+    "kuka_iiwa": {
+        "flat": np.array(
+            [
+                0.00,  # world_joint          (fixed)
+                0.29836,  # lbr_iiwa_joint_1  (revolute)
+                1.30348,  # lbr_iiwa_joint_2  (revolute)
+                2.60906,  # lbr_iiwa_joint_3  (revolute)
+                1.22814,  # lbr_iiwa_joint_4  (revolute)
+                -2.38960,  # lbr_iiwa_joint_5 (revolute)
+                0.80509,  # lbr_iiwa_joint_6  (revolute)
+                2.70994,  # lbr_iiwa_joint_7  (revolute)
+                0.00,  # ee_joint             (fixed)
+                0.00,  # tactip_ee_joint      (fixed)
+                0.00,  # tactip_tip_to_body  (fixed)
+                0.00,  # tcp_joint            (fixed)
+            ]
+        )
+    },
 }
 
 def empty_dir(folder):
@@ -1288,59 +1147,34 @@ class BaseTactileEnv(gym.Env):
 
         return render_array
 
-class ExampleArmEnv(BaseTactileEnv):
+class BaseObjectEnv(BaseTactileEnv):
     def __init__(
         self,
         max_steps=1000,
         image_size=[64, 64],
         env_modes=dict(),
+        TCP_lims=np.zeros(0),
+        rest_poses=np.zeros(0),
         show_gui=False,
         show_tactile=False,
     ):
+        super(BaseObjectEnv, self).__init__(max_steps, image_size, show_gui, show_tactile, arm_type=env_modes["arm_type"])
 
-        # used to setup control of robot
-        self._sim_time_step = 1.0 / 240.0
-        self._control_rate = 1.0 / 10.0
-        self._velocity_action_repeat = int(np.floor(self._control_rate / self._sim_time_step))
-        self._max_blocking_pos_move_steps = 10
-
-        super(ExampleArmEnv, self).__init__(max_steps, image_size, show_gui, show_tactile)
-
-        # set modes from algorithm side
+        # set modes for easy adjustment
         self.movement_mode = env_modes["movement_mode"]
         self.control_mode = env_modes["control_mode"]
         self.observation_mode = env_modes["observation_mode"]
         self.reward_mode = env_modes["reward_mode"]
 
-        # set which robot arm and sensor to use
-        self.arm_type = env_modes["arm_type"]
-        self.t_s_name = env_modes["tactile_sensor_name"]
-        self.t_s_type = "standard"
-        self.t_s_core = "no_core"
-
         # setup variables
+        self.setup_object()
         self.setup_action_space()
 
         # load environment objects
         self.load_environment()
+        self.load_object(self.visualise_goal)
 
-        # limits
-        TCP_lims = np.zeros(shape=(6, 2))
-        TCP_lims[0, 0], TCP_lims[0, 1] = -0.1, +0.1  # x lims
-        TCP_lims[1, 0], TCP_lims[1, 1] = -0.1, +0.1  # y lims
-        TCP_lims[2, 0], TCP_lims[2, 1] = -0.1, +0.1  # z lims
-        TCP_lims[3, 0], TCP_lims[3, 1] = -np.pi / 8, np.pi / 8  # roll lims
-        TCP_lims[4, 0], TCP_lims[4, 1] = -np.pi / 8, np.pi / 8  # pitch lims
-        TCP_lims[5, 0], TCP_lims[5, 1] = -np.pi / 8, np.pi / 8  # yaw lims
-
-        # set workframe
-        self.workframe_pos = np.array([0.65, 0.0, 0.05])
-        self.workframe_rpy = np.array([-np.pi, 0.0, np.pi / 2])
-
-        # initial joint positions used when reset
-        rest_poses = rest_poses_dict[self.arm_type][self.t_s_name][self.t_s_type]
-
-        # load the ur5 with a tactip attached
+        # load the robot arm with a t_s attached
         self.robot = Robot(
             self._pb,
             rest_poses=rest_poses,
@@ -1353,9 +1187,356 @@ class ExampleArmEnv(BaseTactileEnv):
             t_s_name=self.t_s_name,
             t_s_type=self.t_s_type,
             t_s_core=self.t_s_core,
-            t_s_dynamics={'stiffness': 50, 'damping': 100, 'friction': 10.0},
+            t_s_dynamics=self.t_s_dynamics,
             show_gui=self._show_gui,
             show_tactile=self._show_tactile,
+        )
+
+    def setup_action_space(self):
+        """
+        Sets variables used for making network predictions and
+        sending correct actions to robot from raw network predictions.
+        """
+        pass
+
+    def setup_object(self):
+        """
+        Set vars for loading an object
+        """
+        pass
+
+    def load_object(self, visualise_goal=True):
+        """
+        Load an object that is used
+        """
+        # load temp object and goal indicators so they can be more conveniently updated
+        self.obj_id = self._pb.loadURDF(self.object_path, self.init_obj_pos, self.init_obj_orn)
+
+        if visualise_goal:
+            self.goal_indicator = self._pb.loadURDF(self.goal_path, self.init_obj_pos, [0, 0, 0, 1], useFixedBase=True)
+            self._pb.changeVisualShape(self.goal_indicator, -1, rgbaColor=[1, 0, 0, 0.5])
+            self._pb.setCollisionFilterGroupMask(self.goal_indicator, -1, 0, 0)
+
+    def reset_object(self):
+        """
+        Reset the base pose of an object on reset,
+        can also adjust physics params here.
+        """
+        pass
+
+    def make_goal(self):
+        """
+        Generate a goal pose for the object.
+        """
+        pass
+
+    def reset_task(self):
+        """
+        Can be used to reset task specific variables
+        """
+        pass
+
+    def update_workframe(self):
+        """
+        Change workframe on reset if needed
+        """
+        pass
+
+    def update_init_pose(self):
+        """
+        update the workframe to match object size if varied
+        """
+        # default doesn't change from workframe origin
+        init_TCP_pos = np.array([0.0, 0.0, 0.0])
+        init_TCP_rpy = np.array([0.0, 0.0, 0.0])
+        return init_TCP_pos, init_TCP_rpy
+
+    def get_obj_pos_worldframe(self):
+        """
+        Get the current position of the object, return as arrays.
+        """
+        obj_pos, obj_orn = self._pb.getBasePositionAndOrientation(self.obj_id)
+        return np.array(obj_pos), np.array(obj_orn)
+
+    def get_obj_pos_workframe(self):
+        obj_pos, obj_orn = self.get_obj_pos_worldframe()
+        obj_rpy = self._pb.getEulerFromQuaternion(obj_orn)
+
+        obj_pos_workframe, obj_rpy_workframe = self.robot.arm.worldframe_to_workframe(obj_pos, obj_rpy)
+        obj_orn_workframe = self._pb.getQuaternionFromEuler(obj_rpy_workframe)
+        return obj_pos_workframe, obj_orn_workframe
+
+    def get_obj_vel_worldframe(self):
+        """
+        Get the current velocity of the object, return as arrays.
+        """
+        obj_lin_vel, obj_ang_vel = self._pb.getBaseVelocity(self.obj_id)
+        return np.array(obj_lin_vel), np.array(obj_ang_vel)
+
+    def get_obj_vel_workframe(self):
+        """
+        Get the current velocity of the object, return as arrays.
+        """
+        obj_lin_vel, obj_ang_vel = self.get_obj_vel_worldframe()
+        obj_lin_vel, obj_ang_vel = self.robot.arm.worldvel_to_workvel(obj_lin_vel, obj_ang_vel)
+        return np.array(obj_lin_vel), np.array(obj_ang_vel)
+
+    def worldframe_to_objframe(self, pos, rpy):
+        """
+        Transforms a pose in world frame to a pose in work frame.
+        """
+        pos = np.array(pos)
+        rpy = np.array(rpy)
+        orn = np.array(self._pb.getQuaternionFromEuler(rpy))
+
+        inv_objframe_pos, inv_objframe_orn = self._pb.invertTransform(self.cur_obj_pos_worldframe, self.cur_obj_orn_worldframe)
+        objframe_pos, objframe_orn = self._pb.multiplyTransforms(inv_objframe_pos, inv_objframe_orn, pos, orn)
+
+        return np.array(objframe_pos), np.array(objframe_orn)
+
+    def reset(self):
+        """
+        Reset the environment after an episode terminates.
+        """
+
+        # full reset pybullet sim to clear cache, this avoids silent bug where memory fills and visual
+        # rendering fails, this is more prevelant when loading/removing larger files
+        if self.reset_counter == self.reset_limit:
+            self.full_reset()
+
+        self.reset_counter += 1
+        self._env_step_counter = 0
+
+        # update the workframe to a new position if randomisations are on
+        self.reset_task()
+        self.update_workframe()
+
+        init_TCP_pos, init_TCP_rpy = self.update_init_pose()
+        self.robot.reset(reset_TCP_pos=init_TCP_pos, reset_TCP_rpy=init_TCP_rpy)
+
+        # for debug
+        # set_trace()
+        # self.robot.arm.print_joint_pos_vel()
+
+        # reset object
+        self.reset_object()
+
+        # define a new goal position based on init pose of object
+        self.make_goal()
+
+        # just to change variables to the reset pose incase needed before taking
+        # a step
+        self.get_step_data()
+
+        # get the starting observation
+        self._observation = self.get_observation()
+
+        return self._observation
+
+    def full_reset(self):
+        """
+        Pybullet can encounter some silent bugs, particularly when unloading and
+        reloading objects. This will do a full reset every once in a while to
+        clear caches.
+        """
+        self._pb.resetSimulation()
+        self.load_environment()
+        self.load_object(self.visualise_goal)
+        self.robot.full_reset()
+        self.reset_counter = 0
+
+    def encode_actions(self, actions):
+        """
+        Return actions as np.array in correct places for sending to ur5.
+        """
+        pass
+
+    def xyz_tcp_dist_to_goal(self):
+        """
+        xyz L2 distance from the current tip position to the goal.
+        """
+        dist = np.linalg.norm(self.cur_tcp_pos_worldframe - self.goal_pos_worldframe)
+        return dist
+
+    def xyz_obj_dist_to_goal(self):
+        """
+        xyz L2 distance from the current obj position to the goal.
+        """
+        dist = np.linalg.norm(self.cur_obj_pos_worldframe - self.goal_pos_worldframe)
+        return dist
+
+    def xy_obj_dist_to_goal(self):
+        """
+        xyz L2 distance from the current obj position to the goal.
+        """
+        dist = np.linalg.norm(self.cur_obj_pos_worldframe[:2] - self.goal_pos_worldframe[:2])
+        return dist
+
+    def xyz_tcp_dist_to_obj(self):
+        """
+        xyz L2 distance from the current tip position to the obj center.
+        """
+        dist = np.linalg.norm(self.cur_tcp_pos_worldframe - self.cur_obj_pos_worldframe)
+        return dist
+
+    def orn_obj_dist_to_goal(self):
+        """
+        Distance between the current obj orientation and goal orientation.
+        """
+        dist = np.arccos(np.clip((2 * (np.inner(self.goal_orn_worldframe, self.cur_obj_orn_worldframe) ** 2)) - 1, -1, 1))
+        return dist
+
+    def termination(self):
+        """
+        Criteria for terminating an episode.
+        """
+        pass
+
+    def sparse_reward(self):
+        """
+        Calculate the reward when in sparse mode.
+        """
+        pass
+
+    def dense_reward(self):
+        """
+        Calculate the reward when in dense mode.
+        """
+        pass
+
+    def get_act_dim(self):
+        """
+        Returns action dimensions, dependent on the env/task.
+        """
+        pass
+
+    """
+    Debugging
+    """
+
+    def draw_obj_workframe(self):
+        self._pb.addUserDebugLine(
+            [0, 0, 0],
+            [0.1, 0, 0],
+            [1, 0, 0],
+            parentObjectUniqueId=self.obj_id,
+            parentLinkIndex=-1,
+            lifeTime=0.1,
+        )
+        self._pb.addUserDebugLine(
+            [0, 0, 0],
+            [0, 0.1, 0],
+            [0, 1, 0],
+            parentObjectUniqueId=self.obj_id,
+            parentLinkIndex=-1,
+            lifeTime=0.1,
+        )
+        self._pb.addUserDebugLine(
+            [0, 0, 0],
+            [0, 0, 0.1],
+            [0, 0, 1],
+            parentObjectUniqueId=self.obj_id,
+            parentLinkIndex=-1,
+            lifeTime=0.1,
+        )
+
+    def draw_goal_workframe(self):
+        self._pb.addUserDebugLine(
+            [0, 0, 0],
+            [0.1, 0, 0],
+            [1, 0, 0],
+            parentObjectUniqueId=self.goal_id,
+            parentLinkIndex=-1,
+            lifeTime=0.1,
+        )
+        self._pb.addUserDebugLine(
+            [0, 0, 0],
+            [0, 0.1, 0],
+            [0, 1, 0],
+            parentObjectUniqueId=self.goal_id,
+            parentLinkIndex=-1,
+            lifeTime=0.1,
+        )
+        self._pb.addUserDebugLine(
+            [0, 0, 0],
+            [0, 0, 0.1],
+            [0, 0, 1],
+            parentObjectUniqueId=self.goal_id,
+            parentLinkIndex=-1,
+            lifeTime=0.1,
+        )
+
+class ObjectRollEnv(BaseObjectEnv):
+    def __init__(
+        self,
+        max_steps=1000,
+        image_size=[64, 64],
+        env_modes=env_modes_default,
+        show_gui=False,
+        show_tactile=False,
+    ):
+
+        # used to setup control of robot
+        self._sim_time_step = 1.0 / 240.0
+        self._control_rate = 1.0 / 10.0
+        self._velocity_action_repeat = int(np.floor(self._control_rate / self._sim_time_step))
+        self._max_blocking_pos_move_steps = 10
+
+        # pull params from env_modes specific to push env
+        self.rand_init_obj_pos = env_modes["rand_init_obj_pos"]
+        self.rand_obj_size = env_modes["rand_obj_size"]
+        self.rand_embed_dist = env_modes["rand_embed_dist"]
+
+        # set which robot arm to use
+        self.arm_type = env_modes["arm_type"]
+        # self.arm_type = "ur5"
+        # self.arm_type = "mg400"
+        # self.arm_type = 'franka_panda'
+        # self.arm_type = 'kuka_iiwa'
+
+        # which t_s to use
+        self.t_s_name = env_modes["tactile_sensor_name"]
+        # self.t_s_name = 'tactip'
+        # self.t_s_name = 'digit'
+        self.t_s_type = "flat"
+        self.t_s_core = "fixed"
+        self.t_s_dynamics = {"stiffness": 10.0, "damping": 100, "friction": 10.0}
+
+        # distance from goal to cause termination
+        self.termination_pos_dist = 0.001
+
+        # how much penetration of the tip to optimize for
+        # randomly vary this on each episode
+        self.embed_dist = 0.0015
+
+        # turn on goal visualisation
+        self.visualise_goal = True
+
+        # work frame origin
+        self.workframe_pos = np.array([0.65, 0.0, 2 * 0.0025 - self.embed_dist])
+        self.workframe_rpy = np.array([-np.pi, 0.0, np.pi / 2])
+
+        # limits
+        TCP_lims = np.zeros(shape=(6, 2))
+        TCP_lims[0, 0], TCP_lims[0, 1] = -0.05, 0.05  # x lims
+        TCP_lims[1, 0], TCP_lims[1, 1] = -0.05, 0.05  # y lims
+        TCP_lims[2, 0], TCP_lims[2, 1] = -0.01, 0.01  # z lims
+        TCP_lims[3, 0], TCP_lims[3, 1] = 0, 0  # roll lims
+        TCP_lims[4, 0], TCP_lims[4, 1] = 0, 0  # pitch lims
+        TCP_lims[5, 0], TCP_lims[5, 1] = 0, 0  # yaw lims
+
+        # initial joint positions used when reset
+        rest_poses = rest_poses_dict[self.arm_type][self.t_s_type]
+
+        # init base env
+        super(ObjectRollEnv, self).__init__(
+            max_steps,
+            image_size,
+            env_modes,
+            TCP_lims,
+            rest_poses,
+            show_gui,
+            show_tactile,
         )
 
         # this is needed to set some variables used for initial observation/obs_dim()
@@ -1365,10 +1546,13 @@ class ExampleArmEnv(BaseTactileEnv):
         self.setup_observation_space()
 
     def setup_action_space(self):
-
+        """
+        Sets variables used for making network predictions and
+        sending correct actions to robot from raw network predictions.
+        """
         # these are used for bounds on the action space in SAC and clipping
         # range for PPO
-        self.min_action, self.max_action = -0.01, 0.01
+        self.min_action, self.max_action = -0.25, 0.25
 
         # define action ranges per act dim to rescale output of policy
         if self.control_mode == "TCP_position_control":
@@ -1378,10 +1562,10 @@ class ExampleArmEnv(BaseTactileEnv):
 
             self.x_act_min, self.x_act_max = -max_pos_change, max_pos_change
             self.y_act_min, self.y_act_max = -max_pos_change, max_pos_change
-            self.z_act_min, self.z_act_max = -max_pos_change, max_pos_change
-            self.roll_act_min, self.roll_act_max = -max_ang_change, max_ang_change
-            self.pitch_act_min, self.pitch_act_max = -max_ang_change, max_ang_change
-            self.yaw_act_min, self.yaw_act_max = -max_ang_change, max_ang_change
+            self.z_act_min, self.z_act_max = 0, 0
+            self.roll_act_min, self.roll_act_max = 0, 0
+            self.pitch_act_min, self.pitch_act_max = 0, 0
+            self.yaw_act_min, self.yaw_act_max = 0, 0
 
         elif self.control_mode == "TCP_velocity_control":
 
@@ -1390,10 +1574,10 @@ class ExampleArmEnv(BaseTactileEnv):
 
             self.x_act_min, self.x_act_max = -max_pos_vel, max_pos_vel
             self.y_act_min, self.y_act_max = -max_pos_vel, max_pos_vel
-            self.z_act_min, self.z_act_max = -max_pos_vel, max_pos_vel
-            self.roll_act_min, self.roll_act_max = -max_ang_vel, max_ang_vel
-            self.pitch_act_min, self.pitch_act_max = -max_ang_vel, max_ang_vel
-            self.yaw_act_min, self.yaw_act_max = -max_ang_vel, max_ang_vel
+            self.z_act_min, self.z_act_max = 0, 0
+            self.roll_act_min, self.roll_act_max = 0, 0
+            self.pitch_act_min, self.pitch_act_max = 0, 0
+            self.yaw_act_min, self.yaw_act_max = 0, 0
 
         # setup action space
         self.act_dim = self.get_act_dim()
@@ -1405,65 +1589,176 @@ class ExampleArmEnv(BaseTactileEnv):
         )
 
     def setup_rgb_obs_camera_params(self):
-        """
-        Setup camera parameters for debug visualiser and RGB observation
-        """
-        self.rgb_cam_pos = [0.35, 0.0, -0.25]
-        self.rgb_cam_dist = 1.0
+        self.rgb_cam_pos = [0.75, 0.0, 0.00775]
+        self.rgb_cam_dist = 0.01
         self.rgb_cam_yaw = 90
-        self.rgb_cam_pitch = -35
+        self.rgb_cam_pitch = 0
         self.rgb_image_size = self._image_size
+        # self.rgb_image_size = [512,512]
         self.rgb_fov = 75
-        self.rgb_near_val = 0.1
+        self.rgb_near_val = 0.01
         self.rgb_far_val = 100
 
-    def reset(self):
+    def setup_object(self):
+        """
+        Set vars for loading an object
+        """
+        # currently hardcode these for cube, could pull this from bounding box
+        self.default_obj_radius = 0.0025
 
-        # full reset pybullet sim to clear cache, this avoids silent bug where memory fills and visual
-        # rendering fails, this is more prevalent when loading/removing larger files
-        if self.reset_counter == self.reset_limit:
-            self.full_reset()
+        # define an initial position for the objects (world coords)
+        self.init_obj_pos = [0.65, 0.0, self.default_obj_radius]
 
-        self.reset_counter += 1
-        self._env_step_counter = 0
+        self.init_obj_orn = self._pb.getQuaternionFromEuler([0.0, 0.0, 0.0])
 
-        # reset TCP pos and rpy in work frame
-        self.robot.reset(reset_TCP_pos=[0, 0, 0], reset_TCP_rpy=[0, 0, 0])
+        # textured objects don't render in direct mode
+        if self._show_gui:
+            self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_roll/sphere/sphere_tex.urdf")
+        else:
+            self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_roll/sphere/sphere.urdf")
 
-        # get the starting observation
-        self._observation = self.get_observation()
+        self.goal_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_roll/sphere/sphere.urdf")
 
-        return self._observation
+    def reset_task(self):
+        """
+        Change marble size if enabled.
+        Change embed distance if enabled.
+        """
+        if self.rand_obj_size:
+            self.scaling_factor = self.np_random.uniform(1.0, 2.0)
+        else:
+            self.scaling_factor = 1.0
 
-    def full_reset(self):
-        self._pb.resetSimulation()
-        self.load_environment()
-        self.robot.full_reset()
-        self.reset_counter = 0
+        self.scaled_obj_radius = self.default_obj_radius * self.scaling_factor
+
+        if self.rand_embed_dist:
+            self.embed_dist = self.np_random.uniform(0.0015, 0.003)
+
+    def update_workframe(self):
+        """
+        Change workframe on reset if needed
+        """
+        # reset workframe origin based on new obj radius
+        self.workframe_pos = np.array([0.65, 0.0, 2 * self.scaled_obj_radius - self.embed_dist])
+
+        # set the arm workframe
+        self.robot.arm.set_workframe(self.workframe_pos, self.workframe_rpy)
+
+    def reset_object(self):
+        """
+        Reset the base pose of an object on reset,
+        can also adjust physics params here.
+        """
+        # reset the position of the object
+        if self.rand_init_obj_pos:
+            self.init_obj_pos = [
+                0.65 + self.np_random.uniform(-0.009, 0.009),
+                0.0 + self.np_random.uniform(-0.009, 0.009),
+                self.scaled_obj_radius,
+            ]
+        else:
+            self.init_obj_pos = [0.65, 0.0, self.scaled_obj_radius]
+
+        self.init_obj_orn = self._pb.getQuaternionFromEuler([0.0, 0.0, 0.0])
+
+        if not self.rand_obj_size:
+            self._pb.resetBasePositionAndOrientation(self.obj_id, self.init_obj_pos, self.init_obj_orn)
+        else:
+            self._pb.removeBody(self.obj_id)
+
+            self.obj_id = self._pb.loadURDF(
+                self.object_path, self.init_obj_pos, self.init_obj_orn, globalScaling=self.scaling_factor
+            )
+
+        # could perform object dynamics randomisations here
+        self._pb.changeDynamics(
+            self.obj_id,
+            -1,
+            lateralFriction=10.0,
+            spinningFriction=0.0,
+            rollingFriction=0.0,
+            restitution=0.0,
+            frictionAnchor=0,
+            collisionMargin=0.000001,
+        )
+
+    def make_goal(self):
+        """
+        Generate a goal place a set distance from the inititial object pose.
+        """
+
+        # place goal randomly
+        goal_ang = self.np_random.uniform(-np.pi, np.pi)
+        if self.rand_init_obj_pos:
+            goal_dist = self.np_random.uniform(low=0.0, high=0.015)
+        else:
+            goal_dist = self.np_random.uniform(low=0.005, high=0.015)
+
+        self.goal_pos_tcp = np.array([goal_dist * np.cos(goal_ang), goal_dist * np.sin(goal_ang), 0.0])
+
+        self.goal_rpy_tcp = [0.0, 0.0, 0.0]
+        self.goal_orn_tcp = self._pb.getQuaternionFromEuler(self.goal_rpy_tcp)
+
+        self.update_goal()
+
+    def update_goal(self):
+        """
+        Transforms goal in TCP frame to a pose in world frame.
+        """
+        (
+            cur_tcp_pos,
+            _,
+            cur_tcp_orn,
+            _,
+            _,
+        ) = self.robot.arm.get_current_TCP_pos_vel_worldframe()
+        (
+            self.goal_pos_worldframe,
+            self.goal_orn_worldframe,
+        ) = self._pb.multiplyTransforms(cur_tcp_pos, cur_tcp_orn, self.goal_pos_tcp, self.goal_orn_tcp)
+        self.goal_rpy_worldframe = self._pb.getEulerFromQuaternion(self.goal_orn_worldframe)
+
+        # create variables for goal pose in workframe frame to use later
+        (
+            self.goal_pos_workframe,
+            self.goal_rpy_workframe,
+        ) = self.robot.arm.worldframe_to_workframe(self.goal_pos_worldframe, self.goal_rpy_worldframe)
+        self.goal_orn_workframe = self._pb.getQuaternionFromEuler(self.goal_rpy_workframe)
+
+        # useful for visualisation
+        if self.visualise_goal:
+            self._pb.resetBasePositionAndOrientation(self.goal_indicator, self.goal_pos_worldframe, self.goal_orn_worldframe)
 
     def encode_actions(self, actions):
         """
-        Return actions as np.array in correct places for sending to robot arm
-        i.e. NN could be predicting [y, Rz] actions. Make sure they are in
-        correct place [1, 5].
+        Return actions as np.array in correct places for sending to robot arm.
         """
 
         encoded_actions = np.zeros(6)
 
-        if self.movement_mode == "xyzRxRyRz":
+        if self.movement_mode == "xy":
             encoded_actions[0] = actions[0]
             encoded_actions[1] = actions[1]
-            encoded_actions[2] = actions[2]
-            encoded_actions[3] = actions[3]
-            encoded_actions[4] = actions[4]
-            encoded_actions[5] = actions[5]
-
-        else:
-            sys.exit("Incorrect movement mode specified: {}".format(self.movement_mode))
 
         return encoded_actions
 
     def get_step_data(self):
+
+        # update the world position of the goal based on current position of TCP
+        self.update_goal()
+
+        # get the cur tip pos here for once per step
+        (
+            self.cur_tcp_pos_worldframe,
+            self.cur_tcp_rpy_worldframe,
+            self.cur_tcp_orn_worldframe,
+            _,
+            _,
+        ) = self.robot.arm.get_current_TCP_pos_vel_worldframe()
+        (
+            self.cur_obj_pos_worldframe,
+            self.cur_obj_orn_worldframe,
+        ) = self.get_obj_pos_worldframe()
 
         # get rl info
         done = self.termination()
@@ -1477,27 +1772,183 @@ class ExampleArmEnv(BaseTactileEnv):
         return reward, done
 
     def termination(self):
+        """
+        Criteria for terminating an episode.
+        """
+        # terminate when distance to goal is < eps
+        pos_dist = self.xy_obj_dist_to_goal()
+
+        if pos_dist < self.termination_pos_dist:
+            return True
+
         # terminate when max ep len reached
         if self._env_step_counter >= self._max_steps:
             return True
+
         return False
 
     def sparse_reward(self):
-        return 0.0
+        """
+        Calculate the reward when in sparse mode.
+        +1 is given if object reaches goal.
+        """
+        # terminate when distance to goal is < eps
+        pos_dist = self.xy_obj_dist_to_goal()
+
+        if pos_dist < self.termination_pos_dist:
+            reward = 1.0
+        else:
+            reward = 0.0
+        return reward
 
     def dense_reward(self):
-        return 0.0
+        """
+        Calculate the reward when in dense mode.
+        """
+        W_obj_goal_pos = 1.0
+
+        goal_pos_dist = self.xy_obj_dist_to_goal()
+
+        # sum rewards with multiplicative factors
+        reward = -(W_obj_goal_pos * goal_pos_dist)
+
+        return reward
+
+    def get_oracle_obs(self):
+        """
+        Use for sanity checking, no tactile observation just features that should
+        be enough to learn reasonable policies.
+        """
+        # get sim info on object
+        cur_obj_pos_workframe, cur_obj_orn_workframe = self.get_obj_pos_workframe()
+        (
+            cur_obj_lin_vel_workframe,
+            cur_obj_ang_vel_workframe,
+        ) = self.get_obj_vel_workframe()
+
+        # get sim info on TCP
+        (
+            tcp_pos_workframe,
+            tcp_rpy_workframe,
+            tcp_orn_workframe,
+            tcp_lin_vel_workframe,
+            tcp_ang_vel_workframe,
+        ) = self.robot.arm.get_current_TCP_pos_vel_workframe()
+
+        # stack into array
+        observation = np.hstack(
+            [
+                *tcp_pos_workframe,
+                *tcp_orn_workframe,
+                *tcp_lin_vel_workframe,
+                *tcp_ang_vel_workframe,
+                *cur_obj_pos_workframe,
+                *cur_obj_orn_workframe,
+                *cur_obj_lin_vel_workframe,
+                *cur_obj_ang_vel_workframe,
+                *self.goal_pos_tcp,
+                *self.goal_orn_tcp,
+                self.scaled_obj_radius,
+            ]
+        )
+
+        return observation
+
+    def get_extended_feature_array(self):
+        """
+        features needed to help complete task.
+        Goal pose in TCP frame.
+        """
+        feature_array = np.array([*self.goal_pos_tcp])
+        return feature_array
 
     def get_act_dim(self):
-        if self.movement_mode == "xyzRxRyRz":
-            return 6
-        else:
-            sys.exit("Incorrect movement mode specified: {}".format(self.movement_mode))
+        """
+        Returns action dimensions, dependent on the env/task.
+        """
+        if self.movement_mode == "xy":
+            return 2
+
+    def overlay_goal_on_image(self, tactile_image):
+        """
+        Overlay a crosshairs onto the observation in roughly the position
+        of the goal
+        """
+        # get the coords of the goal in image space
+        # min/max from 20mm radius tip + extra for border
+        min, max = -0.021, 0.021
+        norm_tcp_pos_x = (self.goal_pos_tcp[0] - min) / (max - min)
+        norm_tcp_pos_y = (self.goal_pos_tcp[1] - min) / (max - min)
+
+        goal_coordinates = (
+            int(norm_tcp_pos_x * self.rgb_image_size[0]),
+            int(norm_tcp_pos_y * self.rgb_image_size[1]),
+        )
+
+        # Draw a circle at the goal
+        marker_size = int(self.rgb_image_size[0] / 32)
+        overlay_img = cv2.drawMarker(
+            tactile_image,
+            goal_coordinates,
+            (255, 255, 255),
+            markerType=cv2.MARKER_CROSS,
+            markerSize=marker_size,
+            thickness=1,
+            line_type=cv2.LINE_AA,
+        )
+
+        return overlay_img
+
+    def render(self, mode="rgb_array"):
+        """
+        Most rendering handeled with show_gui, show_tactile flags.
+        This is useful for saving videos.
+        """
+
+        if mode != "rgb_array":
+            return np.array([])
+
+        # get the rgb camera image
+        rgb_array = self.get_visual_obs()
+
+        # get the current tactile images and reformat to match rgb array
+        tactile_array = self.get_tactile_obs()
+        tactile_array = cv2.cvtColor(tactile_array, cv2.COLOR_GRAY2RGB)
+
+        # rezise tactile to match rgb if rendering in higher res
+        if self._image_size != self.rgb_image_size:
+            tactile_array = cv2.resize(tactile_array, tuple(self.rgb_image_size))
+
+        # add goal indicator in approximate position
+        tactile_array = self.overlay_goal_on_image(tactile_array)
+
+        # concat the images into a single image
+        render_array = np.concatenate([rgb_array, tactile_array], axis=1)
+
+        # setup plot for rendering
+        if self._first_render:
+            self._first_render = False
+            if self._seed is not None:
+                self.window_name = "render_window_{}".format(self._seed)
+            else:
+                self.window_name = "render_window"
+            cv2.namedWindow(self.window_name, cv2.WINDOW_NORMAL)
+
+        # plot rendered image
+        if not self._render_closed:
+            render_array_rgb = cv2.cvtColor(render_array, cv2.COLOR_BGR2RGB)
+            cv2.imshow(self.window_name, render_array_rgb)
+            if cv2.waitKey(1) & 0xFF == 27:
+                cv2.destroyWindow(self.window_name)
+                self._render_closed = True
+
+        return render_array
 
 def main():
+
     seed = int(0)
     num_iter = 10
-    max_steps = 10000
+    max_steps = 200
     show_gui = True
     show_tactile = False
     render = True
@@ -1505,38 +1956,35 @@ def main():
     image_size = [256, 256]
     env_modes = {
         # which dofs can have movement (environment dependent)
-        "movement_mode": "xyzRxRyRz",
+        "movement_mode": "xy",
 
         # specify arm
         "arm_type": "ur5",
-        # "arm_type": "franka_panda",
-        # "arm_type": "kuka_iiwa",
-        # "arm_type": "mg400",
 
         # specify tactile sensor
         "tactile_sensor_name": "tactip",
-        # "tactile_sensor_name": "digit",
-        # "tactile_sensor_name": "digitac",
 
         # the type of control used
-        # 'control_mode':'TCP_position_control',
-        "control_mode": "TCP_velocity_control",
+        # "control_mode": "TCP_position_control",
+        'control_mode': 'TCP_velocity_control',
+
+        # add variation to joint force for rigid core
+        "rand_init_obj_pos": False,
+        "rand_obj_size": False,
+        "rand_embed_dist": False,
 
         # which observation type to return
-        "observation_mode": "oracle",
-        # 'observation_mode':'tactile',
-        # 'observation_mode':'visual',
-        # 'observation_mode':'visuotactile',
-        # 'observation_mode':'tactile_and_feature',
+        'observation_mode': 'oracle',
+        # "observation_mode": "tactile_and_feature",
         # 'observation_mode':'visual_and_feature',
         # 'observation_mode':'visuotactile_and_feature',
 
         # the reward type
+        "reward_mode": "dense"
         # 'reward_mode':'sparse'
-        "reward_mode": "dense",
     }
 
-    env = ExampleArmEnv(
+    env = ObjectRollEnv(
         max_steps=max_steps,
         env_modes=env_modes,
         show_gui=show_gui,
@@ -1546,34 +1994,28 @@ def main():
 
     # set seed for deterministic results
     env.seed(seed)
-    # env.action_space.np_random.bit_generator.seed(seed)
+    # env.action_space.np_random.seed(seed)
 
     # create controllable parameters on GUI
     action_ids = []
-    min_action, max_action = env.min_action, env.max_action
+    min_action = env.min_action
+    max_action = env.max_action
+
     if show_gui:
-        action_ids.append(
-            env._pb.addUserDebugParameter("dx", min_action, max_action, 0)
-        )
-        action_ids.append(
-            env._pb.addUserDebugParameter("dy", min_action, max_action, 0)
-        )
-        action_ids.append(
-            env._pb.addUserDebugParameter("dz", min_action, max_action, 0)
-        )
-        action_ids.append(
-            env._pb.addUserDebugParameter("dRX", min_action, max_action, 0)
-        )
-        action_ids.append(
-            env._pb.addUserDebugParameter("dRY", min_action, max_action, 0)
-        )
-        action_ids.append(
-            env._pb.addUserDebugParameter("dRZ", min_action, max_action, 0)
-        )
+        if env_modes["movement_mode"] == "x":
+            action_ids.append(env._pb.addUserDebugParameter("dx", min_action, max_action, 0))
+
+        elif env_modes["movement_mode"] == "xy":
+            action_ids.append(env._pb.addUserDebugParameter("dx", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter("dy", min_action, max_action, 0))
+
+        elif env_modes["movement_mode"] == "xyz":
+            action_ids.append(env._pb.addUserDebugParameter("dx", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter("dy", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter("dz", min_action, max_action, 0))
 
     # run the control loop
     demo_rl_env(env, num_iter, action_ids, show_gui, show_tactile, render, print_info)
-
 
 if __name__ == "__main__":
     main()
